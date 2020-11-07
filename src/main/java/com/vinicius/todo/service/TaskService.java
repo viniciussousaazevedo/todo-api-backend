@@ -6,6 +6,7 @@ import com.vinicius.todo.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service // define o service
 public class TaskService {
@@ -27,6 +28,16 @@ public class TaskService {
         this.taskRepository.delete(task);
     }
 
-    public Task uptade(Task task) {
+    public Task uptade(Task task) throws Exception {
+
+        Optional<Task> op = this.taskRepository.findById(task.getId());
+        if (op.isPresent()) {
+            Task tUpdate = op.get();
+            tUpdate.setTitle(task.getTitle());
+            tUpdate.setDescription(task.getDescription());
+            return this.taskRepository.save(tUpdate);
+        } else {
+            throw new Exception("Registro nao encontrado");
+        }
     }
 }
