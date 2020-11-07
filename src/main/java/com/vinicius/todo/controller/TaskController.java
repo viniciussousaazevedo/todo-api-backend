@@ -21,7 +21,7 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public Task getOne(Long id) {
+    public Task getOne(@PathVariable Long id) {
         return this.taskService.getById(id);
     }
 
@@ -30,9 +30,9 @@ public class TaskController {
         return this.taskService.save(task);
     }
 
-    @DeleteMapping
-    public void delete(@RequestBody Task task) {
-        this.taskService.delete(task.getId());
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        this.taskService.delete(id);
     }
 
     @PutMapping

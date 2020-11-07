@@ -1,6 +1,7 @@
 package com.vinicius.todo.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "tasks") // define o nome da tabela mapeada
 @Getter
 @Setter // cria os getters e setters automaticamente
+@NoArgsConstructor
 public class Task {
     @Id // define o identificador (a tarefa, no caso)
     @GeneratedValue(strategy = GenerationType.IDENTITY) // define que esse id é gerado automaticamente e é sequencial

@@ -21,7 +21,11 @@ public class TaskService {
     }
 
     public Task getById(Long id) {
-        return this.taskRepository.getOne(id);
+        Optional<Task> op = this.taskRepository.findById(id);
+        if (op.isPresent()) {
+            return op.get();
+        }
+        return null;
     }
 
     public Task save(Task task) {
