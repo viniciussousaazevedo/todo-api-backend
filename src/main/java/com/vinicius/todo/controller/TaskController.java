@@ -20,13 +20,13 @@ public class TaskController {
         return this.taskService.list();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // se o verbo for get em "/tasks/{id}", ele cai nesse metodo
     public Task getOne(Long id) {
         return this.taskService.getById(id);
     }
 
     @PostMapping
-    public Task save(@RequestBody Task task) { //@ -> essa informação vem no body da request
+    public Task save(@RequestBody Task task) { //@ -> esse parametro vem no body da request
         return this.taskService.save(task);
     }
 
