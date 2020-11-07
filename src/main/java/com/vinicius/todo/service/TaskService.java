@@ -18,4 +18,15 @@ public class TaskService {
     public List<Task> list() { // método p/ listar todas as atividades
         return this.taskRepository.findAll();
     }
+
+    public Task save(Task task) {
+        return this.taskRepository.save(task);
+    }
+
+    public void delete(Task task) {
+        this.taskRepository.delete(task);
+    }
+
+    public Task uptade(Task task) {
+    }
 }
