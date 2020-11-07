@@ -20,24 +20,32 @@ public class TaskService {
         return this.taskRepository.findAll();
     }
 
+    public Task getById(Long id) {
+        return this.taskRepository.getOne(id);
+    }
+
     public Task save(Task task) {
         return this.taskRepository.save(task);
     }
 
-    public void delete(Task task) {
+    public void delete(Long id) {
+        Task task = this.taskRepository.getOne(id);
         this.taskRepository.delete(task);
     }
 
-    public Task uptade(Task task) throws Exception {
+    public Task uptade(Task task) throws Exception { // Não existe um metodo específico para dar update
 
-        Optional<Task> op = this.taskRepository.findById(task.getId());
-        if (op.isPresent()) {
-            Task tUpdate = op.get();
-            tUpdate.setTitle(task.getTitle());
-            tUpdate.setDescription(task.getDescription());
-            return this.taskRepository.save(tUpdate);
+        // task passada como parâmetro é a tarefa a ser atualizada, tendo o mesmo id da tarefa antiga
+
+        Optional<Task> op = this.taskRepository.findById(task.getId()); // op -> procura o id da tarefa existente no bd (antiga)
+        if (op.isPresent()) { // se for achado
+            Task tUpdate = op.get(); // tUpdate = conteúdo da tarefa antiga tarefa antiga
+            tUpdate.setTitle(task.getTitle()); // muda o titulo para o novo
+            tUpdate.setDescription(task.getDescription()); // muda a descrição para o novo
+            return this.taskRepository.save(tUpdate); // salva a tarefa atualizada
         } else {
             throw new Exception("Registro nao encontrado");
         }
     }
+
 }
